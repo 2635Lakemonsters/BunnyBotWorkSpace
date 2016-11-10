@@ -157,7 +157,9 @@ ShooterEnabled ShooterEnabled;
         
         
         
-       
+        if(nerfSwitch.get()) {
+        	System.out.println("True");
+        }
         
     
         	

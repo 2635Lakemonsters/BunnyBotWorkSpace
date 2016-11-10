@@ -145,7 +145,7 @@ ShooterEnabled ShooterEnabled;
         	shooter.update(joystick.getRawButton(1));
         	shooterEnabled.isEnabled=true;
         }
-        motor.set(shooter.getMotorSpeed()/2);
+        motor.set(shooter.getMotorSpeed()/5);
         flywheel.set(0.2);
         /*if (shooter.getMotorSpeed() == 1.0) {
         	relay.set(Relay.Value.kForward);
@@ -157,7 +157,9 @@ ShooterEnabled ShooterEnabled;
         
         
         
-       
+        if(nerfSwitch.get()) {
+        	System.out.println("True");
+        }
         
     
         	

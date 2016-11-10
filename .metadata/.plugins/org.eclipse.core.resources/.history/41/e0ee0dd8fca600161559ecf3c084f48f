@@ -60,7 +60,7 @@ ShooterEnabled ShooterEnabled;
         button = new JoystickButton(joystick,1);
         relay = new Relay(0);
         shooter = new ShooterModes(shooterEnabled);
-        nerfSwitch = new DigitalInput(1);
+        nerfSwitch = new DigitalInput(0);
         
     }
 	
@@ -157,11 +157,13 @@ ShooterEnabled ShooterEnabled;
         
         
         
-       
+        if(nerfSwitch.get()) {
+        	System.out.println("True");
+        }
         
     
         	
- 
+       
       
         
         

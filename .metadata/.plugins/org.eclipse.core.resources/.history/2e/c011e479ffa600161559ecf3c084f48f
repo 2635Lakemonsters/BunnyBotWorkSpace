@@ -234,7 +234,7 @@ public class ShooterModes {
 				}
 				break;
 			case SHOOTING:
-				if (nerfSwitch){System.out.println("Hi");};
+				if (nerfSwitch){System.out.println("Hi");
 				if (shooterTimer.hasPeriodPassed(SHOOT_TIME)){
 					motorSpeed = 0.0;
 					autoShooterState = autoShooterEnum.STOP;
