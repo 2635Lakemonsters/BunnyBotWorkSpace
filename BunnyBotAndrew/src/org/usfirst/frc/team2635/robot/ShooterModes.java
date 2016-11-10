@@ -7,6 +7,7 @@ public class ShooterModes {
 	private static final double SHOOT_TIME = 100.0E-3;
 	int num = 0;
 	double motorSpeed;
+	ShooterEnabled  shooterEnabled;
 	public double getMotorSpeed() {
 		return motorSpeed;
 	}
@@ -15,8 +16,9 @@ public class ShooterModes {
 	singleShooterEnum singleShooterState = singleShooterEnum.INIT ;
 	enum burstShooterEnum {INIT,SHOOTING,STOP,RESET}
 	burstShooterEnum burstShooterState = burstShooterEnum.INIT;
-	public ShooterModes() {
+	public ShooterModes(ShooterEnabled shEnabled) {
 		super();
+		shooterEnabled.isEnabled = shEnabled;
 		shooterTimer = new Timer();
 	}
 	
@@ -48,6 +50,7 @@ public class ShooterModes {
 		case RESET:
 			if (!button) {
 				singleShooterState = singleShooterEnum.INIT;
+				shooterEnabled.isEnabled = false;
 			}
 		
 		default:

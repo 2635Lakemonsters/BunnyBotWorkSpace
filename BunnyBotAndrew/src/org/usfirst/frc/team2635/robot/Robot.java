@@ -29,6 +29,7 @@ Joystick joystick;
 Button button;
 Relay relay;
 ShooterModes shooter;
+ShooterEnabled shooterEnabled;
 final String defaultAuto = "Default";
 final String customAuto = "My Auto";
 
@@ -42,6 +43,9 @@ final String customAuto = "My Auto";
      * used for any initialization code.
      */
     public void robotInit() {
+    	
+    	shooterEnabled = new ShooterEnabled();
+    	shooterEnabled.isEnabled =false; 
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", defaultAuto);
         chooser.addObject("My Auto", customAuto);
@@ -50,7 +54,7 @@ final String customAuto = "My Auto";
         joystick=new Joystick(1);
         button=new JoystickButton(joystick,1);
         relay=new Relay(0);
-        shooter = new ShooterModes();
+        shooter = new ShooterModes(shooterEnabled);
     }
 	
 	/**
@@ -102,7 +106,7 @@ final String customAuto = "My Auto";
 
     public void teleopInit() {
 		// This makes sure that the autonomous stops running when
-        // teleop starts running. If you want the autonomous to 
+        //  starts running. If you want the autonomous to 
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();

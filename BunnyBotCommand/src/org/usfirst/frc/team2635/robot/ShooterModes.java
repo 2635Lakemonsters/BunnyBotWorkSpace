@@ -5,8 +5,11 @@ import edu.wpi.first.wpilibj.Timer;
 public class ShooterModes {
 	private static final double SHOOTER_OFF_TIME = 0.1;
 	private static final double SHOOT_TIME = 100.0E-3;
+	boolean set;
 	int num = 0;
+	ShooterEnabled shooterEnabled;
 	double motorSpeed;
+	int prevMode;
 	public double getMotorSpeed() {
 		return motorSpeed;
 	}
@@ -21,13 +24,15 @@ public class ShooterModes {
 	modesEnum modesState = modesEnum.SINGLE;
 	boolean nerfSwitch;
 	
-	public ShooterModes() {
+	public ShooterModes(ShooterEnabled shEnabled) {
 		super();
+		prevMode=0;
+		shooterEnabled=shEnabled;
 		shooterTimer = new Timer();
 	}
 	
 	public void setSwitch(boolean nerfS) {
-		nerfS = nerfSwitch;
+		nerfSwitch=nerfS;
 		if(nerfSwitch) {
 			System.out.println("TRUE");
 		}
@@ -72,20 +77,28 @@ public class ShooterModes {
 		
 		switch (singleShooterState){
 		case INIT:
+			prevMode=0;
 			if (button) {
 				motorSpeed = 1.0;
+				set=false;
 				singleShooterState = singleShooterEnum.SHOOTING;
+				
 			}
 			break;
 		case SHOOTING:
-			
-			if (!nerfSwitch){
+			if(prevMode!=0){singleShooterState = singleShooterEnum.INIT;};
+			if (nerfSwitch==true&&set==true){
 				motorSpeed = 0.0;
 				singleShooterState = singleShooterEnum.RESET;
 				System.out.println("Stopped");
-			}
+				
+		}
+			else {
+				set=true;
+				}
+		
 			
-			else if(!button){singleShooterState=singleShooterEnum.INIT;}
+		
 			
 			break;
 		case STOP:
@@ -94,8 +107,12 @@ public class ShooterModes {
 			}
 			break;
 		case RESET:
-			if (!button) {
+			motorSpeed=0.0;
+			if(prevMode!=0){singleShooterState = singleShooterEnum.INIT;};
+			if (!button){
 				singleShooterState = singleShooterEnum.INIT;
+				set=false;
+				shooterEnabled.isEnabled=false;
 			}
 		
 		default:
@@ -144,6 +161,7 @@ public class ShooterModes {
 		public void burstUpdate (boolean button) {
 			switch (burstShooterState){
 			case INIT:
+				prevMode=1;
 				if (button) {
 					motorSpeed = 1.0;
 					burstShooterState = burstShooterEnum.SHOOTING;
@@ -203,8 +221,9 @@ public class ShooterModes {
 			
 			
 			
-			/*switch (autoShooterState){
+			switch (autoShooterState){
 			case INIT:
+				prevMode=2;
 				if (button) {
 					motorSpeed = 1.0;
 					autoShooterState = autoShooterEnum.SHOOTING;
@@ -246,7 +265,7 @@ public class ShooterModes {
 						autoShooterState = autoShooterEnum.INIT;
 					}
 				break;
-				}*/
+				}
 	
 			}
 		}

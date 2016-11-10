@@ -34,28 +34,34 @@ Relay relay;
 ShooterModes shooter;
 final String defaultAuto = "Default";
 final String customAuto = "My Auto";
+boolean nerfSw;
+ShooterEnabled ShooterEnabled;
 
 	public static OI oi;
 
     Command autonomousCommand;
     SendableChooser chooser;
-
+    ShooterEnabled shooterEnabled;
+    
     /**
      * This function is run when the robot is first started up and should be
      * used for any initialization code.
      */
     public void robotInit() {
+    	shooterEnabled = new ShooterEnabled();
+    	shooterEnabled.isEnabled = false; 
         chooser = new SendableChooser();
         chooser.addDefault("Default Auto", defaultAuto);
         chooser.addObject("My Auto", customAuto);
         SmartDashboard.putData("Auto choices", chooser);
         motor = new CANTalon(7);
         flywheel = new CANTalon(1);
-        joystick = new Joystick(0);
+        joystick = new Joystick(1);
         button = new JoystickButton(joystick,1);
         relay = new Relay(0);
-        shooter = new ShooterModes();
+        shooter = new ShooterModes(shooterEnabled);
         nerfSwitch = new DigitalInput(0);
+        
     }
 	
 	/**
@@ -120,6 +126,9 @@ final String customAuto = "My Auto";
      */
     public void teleopPeriodic() {
         Scheduler.getInstance().run();
+        nerfSw=false;
+        nerfSw = nerfSwitch.get();
+        
         shooter.setSwitch(nerfSwitch.get());
         /*if(joystick.getRawButton(5)){
         	relay.set(Relay.Value.kForward);
@@ -131,8 +140,12 @@ final String customAuto = "My Auto";
         	relay.set(Relay.Value.kOff);
         }*/
         shooter.modeChange(joystick.getRawButton(4),joystick.getRawButton(3),joystick.getRawButton(5));
-        shooter.update(joystick.getRawButton(1));
-        motor.set(shooter.getMotorSpeed()/10);
+        
+        if(joystick.getRawButton(1)||shooterEnabled.isEnabled==true){
+        	shooter.update(joystick.getRawButton(1));
+        	shooterEnabled.isEnabled=true;
+        }
+        motor.set(shooter.getMotorSpeed()/2);
         flywheel.set(0.2);
         /*if (shooter.getMotorSpeed() == 1.0) {
         	relay.set(Relay.Value.kForward);
@@ -144,13 +157,9 @@ final String customAuto = "My Auto";
         
         
         
-       if (!nerfSwitch.get()) {
-    	System.out.println("TRUE"); }
- //     } else if (!nerfSwitch.get()){
-   //   	System.out.println("FALSE");
-//    } else {
-   //   	System.out.println("OTHER?");
-  //    }
+        if(nerfSwitch.get()) {
+        	System.out.println("True");
+        }
         
     
         	

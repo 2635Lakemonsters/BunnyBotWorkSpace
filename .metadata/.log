@@ -1255,3 +1255,375 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2016-11-07 18:07:51.327 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_77
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-11-07 18:08:25.629
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\LakeM'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:08:34.064
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:08:34.077
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:08:34.085
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:08:34.096
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:11:23.787
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:11:23.799
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:12:52.919
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:12:52.928
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:15:03.166
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:15:03.182
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:16:15.766
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:16:15.773
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:25:12.334
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:25:12.345
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:25:48.826
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:25:48.833
+!MESSAGE Targets: deploy, Mode: run
+!SESSION 2016-11-07 18:31:06.777 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_77
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-11-07 18:31:30.295
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\LakeM'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:31:32.579
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:31:32.618
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:31:32.626
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-07 18:31:32.647
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:32:01.569
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:32:01.578
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:48:45.683
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:48:45.693
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:54:12.146
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:54:12.153
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:58:22.514
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 18:58:22.520
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 19:36:32.467
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 19:36:32.477
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 19:47:48.575
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 19:47:48.582
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:11:36.039
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:11:36.045
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:17:49.072
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:17:49.081
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:22:25.716
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:22:25.724
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:27:01.927
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:27:01.932
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:27:49.105
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:27:49.113
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:29:14.504
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:29:14.511
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:29:54.653
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:29:54.661
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:30:58.543
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:30:58.553
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:31:28.817
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:31:28.824
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:34:50.060
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:34:50.074
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:35:27.904
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:35:27.912
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:37:35.213
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:37:35.221
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:42:35.373
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:42:35.380
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:43:53.680
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:43:53.687
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:49:46.696
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-07 20:49:46.703
+!MESSAGE Targets: deploy, Mode: run
+!SESSION 2016-11-09 18:13:55.861 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_77
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-11-09 18:14:10.989
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\LakeM'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-09 18:14:18.749
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-09 18:14:18.872
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-09 18:14:18.900
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-09 18:14:18.940
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 18:14:20.548
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 18:14:20.643
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 18:44:52.587
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 18:44:52.596
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:29:59.066
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:29:59.072
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:31:25.755
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:31:25.766
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:33:48.066
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:33:48.073
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:35:02.512
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:35:02.521
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:36:47.818
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:36:47.829
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:38:55.201
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:38:55.211
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:39:11.865
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:39:11.876
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:40:48.474
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:40:48.483
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:42:31.365
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:42:31.373
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:43:09.986
+!MESSAGE Last deploy running
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:43:09.994
+!MESSAGE Waiting
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:43:10.003
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:43:10.011
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:43:31.177
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:43:31.182
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:44:34.470
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:44:34.477
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:44:54.179
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:44:54.185
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:45:46.566
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:45:46.572
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:47:49.460
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:47:49.469
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:53:03.546
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:53:03.553
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:53:34.959
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 19:53:34.965
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 20:03:58.015
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 20:03:58.022
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 20:05:33.482
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-09 20:05:33.487
+!MESSAGE Targets: deploy, Mode: run
