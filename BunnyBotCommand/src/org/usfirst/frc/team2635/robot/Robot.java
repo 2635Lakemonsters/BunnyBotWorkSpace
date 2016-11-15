@@ -141,12 +141,18 @@ ShooterEnabled ShooterEnabled;
         }*/
         shooter.modeChange(joystick.getRawButton(4),joystick.getRawButton(3),joystick.getRawButton(5));
         
-        if(joystick.getRawButton(1)||shooterEnabled.isEnabled==true){
+        //if(joystick.getRawButton(1)||shooterEnabled.isEnabled==true){
         	shooter.update(joystick.getRawButton(1));
         	shooterEnabled.isEnabled=true;
-        }
+        //}
         motor.set(shooter.getMotorSpeed()/2);
-        flywheel.set(0.2);
+        if(joystick.getRawButton(2)){
+        	
+        flywheel.set(0.4);
+        }
+        else{
+        	flywheel.set(0.2);
+        }
         /*if (shooter.getMotorSpeed() == 1.0) {
         	relay.set(Relay.Value.kForward);
         } else if (shooter.getMotorSpeed() == 0.0) {

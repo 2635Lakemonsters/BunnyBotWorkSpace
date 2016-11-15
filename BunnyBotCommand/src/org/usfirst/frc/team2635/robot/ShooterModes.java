@@ -6,7 +6,9 @@ public class ShooterModes {
 	private static final double SHOOTER_OFF_TIME = 0.1;
 	private static final double SHOOT_TIME = 100.0E-3;
 	boolean set;
-	int num = 0;
+	
+	int num;
+	
 	ShooterEnabled shooterEnabled;
 	double motorSpeed;
 	int prevMode;
@@ -87,15 +89,16 @@ public class ShooterModes {
 			break;
 		case SHOOTING:
 			if(prevMode!=0){singleShooterState = singleShooterEnum.INIT;};
-			if (nerfSwitch==true&&set==true){
+			if (nerfSwitch==false&&set==true){
 				motorSpeed = 0.0;
 				singleShooterState = singleShooterEnum.RESET;
 				System.out.println("Stopped");
 				
 		}
-			else {
+			else if(nerfSwitch==true) {
 				set=true;
 				}
+			
 		
 			
 		
@@ -108,165 +111,149 @@ public class ShooterModes {
 			break;
 		case RESET:
 			motorSpeed=0.0;
-			if(prevMode!=0){singleShooterState = singleShooterEnum.INIT;};
+			
 			if (!button){
-				singleShooterState = singleShooterEnum.INIT;
+				
 				set=false;
 				shooterEnabled.isEnabled=false;
-			}
-		
-		default:
-			break;
-		}
-		
-		/*switch (singleShooterState){
-		case INIT:
-			if (button) {
-				motorSpeed = 1.0;
-				singleShooterState = singleShooterEnum.SHOOTING;
-				shooterTimer.start();
-			}
-			break;
-		case SHOOTING:
-			
-			if (shooterTimer.hasPeriodPassed(SHOOT_TIME)){
-				motorSpeed = 0.0;
-				singleShooterState = singleShooterEnum.STOP;
-				shooterTimer.stop();
-				shooterTimer.reset();
-				shooterTimer.start();
-			}
-			
-			else if(!button){singleShooterState=singleShooterEnum.INIT;}
-			
-			break;
-		case STOP:
-			if(button){
-			if (shooterTimer.hasPeriodPassed(SHOOTER_OFF_TIME)){
-				singleShooterState = singleShooterEnum.RESET;
-				shooterTimer.stop();
-				shooterTimer.reset();
-			}
-			}
-			break;
-		case RESET:
-			if (!button) {
 				singleShooterState = singleShooterEnum.INIT;
 			}
 		
 		default:
 			break;
-		}*/
 		}
+	}
 		public void burstUpdate (boolean button) {
+			/*if(button && !nerfSwitch) {
+				motorSpeed = 1.0;
+			} else if(!button) {
+				motorSpeed = 0.0;
+			} else if (nerfSwitch) {
+				motorSpeed = 0.0;
+			}*/
+			
 			switch (burstShooterState){
 			case INIT:
 				prevMode=1;
-				if (button) {
+				if (button&&num<3) {
 					motorSpeed = 1.0;
+					set=false;
 					burstShooterState = burstShooterEnum.SHOOTING;
-					shooterTimer.start();
+					
+				}
+				else if (num>2){
+					num=0;
+					motorSpeed=0.0;
 				}
 				else if(!button){
-					burstShooterState=burstShooterEnum.INIT;
 					motorSpeed=0.0;
+					burstShooterState=burstShooterEnum.INIT;
 					num=0;
 				}
 				break;
 			case SHOOTING:
-				if(button){
-				if (shooterTimer.hasPeriodPassed(SHOOT_TIME)){
+				if(prevMode!=1){burstShooterState = burstShooterEnum.INIT;};
+				if (nerfSwitch==false&&set==true){
 					motorSpeed = 0.0;
-					burstShooterState = burstShooterEnum.STOP;
-					shooterTimer.stop();
-					shooterTimer.reset();
-					shooterTimer.start();
+					burstShooterState = burstShooterEnum.RESET;
+					System.out.println("Stopped");
+					
+			}
+				else if(nerfSwitch==true) {
+					set=true;
+					}
+			
+				else if(!button){
+					motorSpeed=0.0;
+					burstShooterState=burstShooterEnum.INIT;
 				}
-				}
-				else if(!button){burstShooterState=burstShooterEnum.INIT;num=0;}
-				else{
-					//What Magic have you done???
-				}
+			
+				
 				break;
 			case STOP:
-				if (shooterTimer.hasPeriodPassed(SHOOTER_OFF_TIME)){
+				if (!nerfSwitch){
 					burstShooterState = burstShooterEnum.RESET;
-					shooterTimer.stop();
-					shooterTimer.reset();
 				}
 				break;
 			case RESET:
-				num++;
-				if(num<3){burstShooterState = burstShooterEnum.INIT;}
-				else{
-					if(!button){
-						num=0;
+				motorSpeed=0.0;
+				if(prevMode!=1){burstShooterState = burstShooterEnum.INIT;};
+				if (button&&num<2){
+					
+					set=false;
+					shooterEnabled.isEnabled=false;
+					num++;
 					burstShooterState = burstShooterEnum.INIT;
 				}
+				else if(num>3){
+					num=0;
+					motorSpeed=0.0;
 				}
-				
+				else if(!button){
+					motorSpeed=0.0;
+					burstShooterState=burstShooterEnum.INIT;
+					num=0;
+				}
+			
 			default:
 				break;
-			
 			}
-	}
-		public void autoUpdate (boolean button) {
+		
+		}
+			public void autoUpdate (boolean button) {
+		switch (autoShooterState){
+		case INIT:
+			prevMode=2;
+			if (button) {
+				motorSpeed = 1.0;
+				set=false;
+				autoShooterState = autoShooterEnum.SHOOTING;
+				
+			}
 			
-			if(button){
-				motorSpeed=1.0;
-			}else{
+			break;
+		case SHOOTING:
+			if(prevMode!=2){autoShooterState = autoShooterEnum.INIT;};
+			if (nerfSwitch==false&&set==true){
+				motorSpeed = 0.0;
+				autoShooterState = autoShooterEnum.RESET;
+				System.out.println("Stopped");
+				
+		}
+			else if(nerfSwitch==true) {
+				set=true;
+				}
+			else if (!button){
+				autoShooterState=autoShooterEnum.INIT;
+				set=false;
 				motorSpeed=0.0;
 			}
+		
 			
+		
 			
-			
-			
-			switch (autoShooterState){
-			case INIT:
-				prevMode=2;
-				if (button) {
-					motorSpeed = 1.0;
-					autoShooterState = autoShooterEnum.SHOOTING;
-					shooterTimer.start();
-				} 
-				else {
-					motorSpeed = 0.0;
-				}
-				break;
-			case SHOOTING:
-				if (nerfSwitch){System.out.println("Hi");};
-				if (shooterTimer.hasPeriodPassed(SHOOT_TIME)){
-					motorSpeed = 0.0;
-					autoShooterState = autoShooterEnum.STOP;
-					shooterTimer.stop();
-					shooterTimer.reset();
-					shooterTimer.start();
-				}
-				
-				else if(!button){autoShooterState=autoShooterEnum.INIT;}
-				
-				break;
-			case STOP:
-				if(button){
-				if (shooterTimer.hasPeriodPassed(SHOOTER_OFF_TIME)){
-					autoShooterState = autoShooterEnum.INIT;
-					shooterTimer.stop();
-					shooterTimer.reset();
-				}
-				else if(!button) {
-					autoShooterState = autoShooterEnum.INIT;
-					shooterTimer.stop();
-					shooterTimer.reset();
-				}
-				}
-				break;
-			case RESET:
-					if (!button) {
-						autoShooterState = autoShooterEnum.INIT;
-					}
-				break;
-				}
-	
+			break;
+		case STOP:
+			if (!nerfSwitch){
+				autoShooterState = autoShooterEnum.RESET;
 			}
+			break;
+		case RESET:
+			motorSpeed=0.0;
+			if(prevMode!=2){autoShooterState = autoShooterEnum.INIT;};
+			
+				autoShooterState = autoShooterEnum.INIT;
+				set=false;
+				shooterEnabled.isEnabled=false;
+			
+				
+			
+		
+		
+			break;
 		}
+		}
+	}
+		
+
 
