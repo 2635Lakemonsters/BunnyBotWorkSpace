@@ -1,0 +1,228 @@
+
+package org.usfirst.frc.team2635.robot;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+//import org.usfirst.frc.team2635.robot.commands.ExampleCommand;
+import org.usfirst.frc.team2635.robot.subsystems.ExampleSubsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+/**
+ * The VM is configured to automatically run this class, and to call the
+ * functions corresponding to each mode, as described in the IterativeRobot
+ * documentation. If you change the name of this class or the package after
+ * creating this project, you must also update the manifest file in the resource
+ * directory.
+ */
+public class Robot extends IterativeRobot {
+;
+CANTalon motor;
+DigitalInput nerfSwitch;
+CANTalon flywheel;
+CANTalon frontLeftMotor;
+CANTalon backLeftMotor;
+CANTalon frontRightMotor;
+CANTalon backRightMotor;
+Joystick leftJoystick;
+Joystick rightJoystick;
+
+Button button;
+Relay relay;
+ShooterModes shooter;
+final String defaultAuto = "Default";
+final String customAuto = "My Auto";
+boolean nerfSw;
+ShooterEnabled ShooterEnabled;
+boolean go;
+double wheel;
+RobotDrive drive;
+
+
+private static final int NERF_MOTOR_CHANNEL = 7;
+private static final int NERF_FLYWHEEL_CHANNEL = 1;
+private static final int NERF_SWITCH_CHANNEL = 1;
+private static final int LEFT_JOYSTICK_CHANNEL = 1;
+private static final int RIGHT_JOYSTICK_CHANNEL = 0;
+private static final int FRONT_RIGHT_MOTOR_CHANNEL = 6;
+private static final int FRONT_LEFT_MOTOR_CHANNEL = 5;
+private static final int BACK_RIGHT_MOTOR_CHANNEL = 9;
+private static final int BACK_LEFT_MOTOR_CHANNEL = 14;
+
+	public static OI oi;
+
+    Command autonomousCommand;
+    SendableChooser chooser;
+    ShooterEnabled shooterEnabled;
+    
+    /**
+     * This function is run when the robot is first started up and should be
+     * used for any initialization code.
+     */
+    public void robotInit() {
+    	shooterEnabled = new ShooterEnabled();
+    	shooterEnabled.isEnabled = false; 
+        chooser = new SendableChooser();
+        chooser.addDefault("Default Auto", defaultAuto);
+        chooser.addObject("My Auto", customAuto);
+        SmartDashboard.putData("Auto choices", chooser);
+        motor = new CANTalon(NERF_MOTOR_CHANNEL);
+        flywheel = new CANTalon(NERF_FLYWHEEL_CHANNEL);
+        leftJoystick = new Joystick(LEFT_JOYSTICK_CHANNEL);
+        rightJoystick = new Joystick(RIGHT_JOYSTICK_CHANNEL);
+        button = new JoystickButton(leftJoystick,1);
+        relay = new Relay(0);
+        shooter = new ShooterModes(shooterEnabled);
+        nerfSwitch = new DigitalInput(NERF_SWITCH_CHANNEL);
+        go=false;
+        
+        frontLeftMotor = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
+        backLeftMotor = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
+        frontRightMotor = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
+        backRightMotor = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
+        
+        drive = new RobotDrive(frontLeftMotor,backLeftMotor,frontRightMotor,backRightMotor);
+    }
+	
+	/**
+     * This function is called once each time the robot enters Disabled mode.
+     * You can use it to reset any subsystem information you want to clear when
+	 * the robot is disabled.
+     */
+    public void disabledInit(){
+
+    }
+	
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
+	}
+
+	/**
+	 * This autonomous (along with the chooser code above) shows how to select between different autonomous modes
+	 * using the dashboard. The sendable chooser code works with the Java SmartDashboard. If you prefer the LabVIEW
+	 * Dashboard, remove all of the chooser code and uncomment the getString code to get the auto name from the text box
+	 * below the Gyro
+	 *
+	 * You can add additional auto modes by adding additional commands to the chooser code above (like the commented example)
+	 * or additional comparisons to the switch structure below with additional strings & commands.
+	 */
+    public void autonomousInit() {
+        autonomousCommand = (Command) chooser.getSelected();
+        
+      /*String autoSelected = SmartDashboard.getString("Auto Selector", "Default");
+		switch(autoSelected) {
+		case "My Auto":
+			autonomousCommand = new MyAutoCommand();
+			break;
+		case "Default Auto":
+		default:
+			autonomousCommand = new ExampleCommand();
+			break;
+		} */
+    	
+    	// schedule the autonomous command (example)
+        if (autonomousCommand != null) autonomousCommand.start();
+    }
+
+    /**
+     * This function is called periodically during autonomous
+     */
+    public void autonomousPeriodic() {
+        Scheduler.getInstance().run();
+    }
+
+    public void teleopInit() {
+		// This makes sure that the autonomous stops running when
+        // teleop starts running. If you want the autonomous to 
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
+        if (autonomousCommand != null) autonomousCommand.cancel();
+        
+        
+    }
+
+    /**
+     * This function is called periodically during operator control
+     */
+    public void teleopPeriodic() {
+        Scheduler.getInstance().run();
+        nerfSw=false;
+        nerfSw = nerfSwitch.get();
+        wheel=leftJoystick.getRawAxis(2);
+        wheel=Math.abs(wheel);
+        
+        
+        shooter.setSwitch(nerfSwitch.get());
+        /*if(joystick.getRawButton(5)){
+        	relay.set(Relay.Value.kForward);
+        } 
+        else if(joystick.getRawButton(4)){
+        	relay.set(Relay.Value.kReverse);
+        }
+        else{
+        	relay.set(Relay.Value.kOff);
+        }*/
+        shooter.modeChange(leftJoystick.getRawButton(4),leftJoystick.getRawButton(3),leftJoystick.getRawButton(5));
+        
+        //if(joystick.getRawButton(1)||shooterEnabled.isEnabled==true){
+        	shooter.update(leftJoystick.getRawButton(1));
+        	shooterEnabled.isEnabled=true;
+        //}
+        motor.set(shooter.getMotorSpeed()/2);
+        /*if(joystick.getRawButton(2)){
+        	
+        flywheel.set(0.4);
+        }
+        else if(joystick.getRawButton(8)){
+        	
+        	flywheel.set(0.0);
+        	
+        }
+        else if(joystick.getRawButton(6)){*/
+        	flywheel.set(0.3);
+        /*}
+        else if(joystick.getRawButton(7)){
+        	flywheel.set(0.5);
+        	}
+        
+        else{
+        	flywheel.set(wheel/2);
+        }*/
+        System.out.println(wheel);
+        /*if (shooter.getMotorSpeed() == 1.0) {
+        	relay.set(Relay.Value.kForward);
+        } else if (shooter.getMotorSpeed() == 0.0) {
+        	relay.set(Relay.Value.kOff);
+        } else {
+        	relay.set(Relay.Value.kOff);
+        }*/
+        
+        
+        
+       
+        
+      drive.tankDrive(leftJoystick, rightJoystick);
+        	
+ 
+      
+        
+        
+      
+    }
+    
+    /**
+     * This function is called periodically during test mode
+     */
+    public void testPeriodic() {
+        LiveWindow.run();
+    }
+}
