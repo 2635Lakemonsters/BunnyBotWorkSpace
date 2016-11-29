@@ -39,7 +39,7 @@ public class Robot extends IterativeRobot {
 	private static final int NERF_SWITCH_CHANNEL = 1;
 	private static final int LEFT_JOYSTICK_CHANNEL = 1;
 	private static final int RIGHT_JOYSTICK_CHANNEL = 0;
-	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 6;
+	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 8;
 	private static final int FRONT_LEFT_MOTOR_CHANNEL = 5;
 	private static final int BACK_RIGHT_MOTOR_CHANNEL = 9;
 	private static final int BACK_LEFT_MOTOR_CHANNEL = 14;
@@ -114,7 +114,7 @@ public class Robot extends IterativeRobot {
         	flywheel.set(wheel/2);
         }*/
         System.out.println(wheel);
-        drive.tankDrive(leftJoystick, rightJoystick);	
+        drive.tankDrive(rightJoystick, leftJoystick);	
     }
 
     public void testPeriodic() {

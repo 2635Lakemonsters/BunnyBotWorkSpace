@@ -2274,3 +2274,100 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 12:14:15.963
 !MESSAGE Installedjava
+!SESSION 2016-11-22 16:23:46.184 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_101
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -product org.eclipse.epp.package.java.product -data C:\Users\LakeM\BunnyBotWorkSpace -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.core.resources 2 10035 2016-11-22 16:23:48.267
+!MESSAGE The workspace exited with unsaved changes in the previous session; refreshing workspace to recover changes.
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-11-22 16:23:59.855
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\LakeM'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:24:02.574
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:24:02.711
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:24:02.771
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:24:02.858
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:24:18.806
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:24:18.815
+!MESSAGE Targets: deploy, Mode: run
+!SESSION 2016-11-22 16:49:00.875 -----------------------------------------------
+eclipse.buildId=4.5.1.M20150904-0015
+java.version=1.8.0_101
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2016-11-22 16:49:19.533
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\LakeM'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:49:21.317
+!MESSAGE Installing tools if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:49:21.359
+!MESSAGE Installedtools
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:49:21.378
+!MESSAGE Installing java if necessary
+
+!ENTRY edu.wpi.first.wpilib.plugins.core 1 0 2016-11-22 16:49:21.410
+!MESSAGE Installedjava
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:50:08.981
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:50:08.988
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:51:58.687
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:51:58.694
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:59:33.170
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 16:59:33.179
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 17:05:52.605
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 17:05:52.611
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 17:09:10.391
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 17:09:10.403
+!MESSAGE Targets: deploy, Mode: run
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 17:13:16.401
+!MESSAGE Running ant file: C:\Users\LakeM\BunnyBotWorkSpace\BunnyBotCommand\build.xml
+
+!ENTRY WPILib_Java_Robot_Development 1 0 2016-11-22 17:13:16.407
+!MESSAGE Targets: deploy, Mode: run
