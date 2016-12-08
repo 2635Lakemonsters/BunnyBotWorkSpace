@@ -1,0 +1,119 @@
+package org.usfirst.frc.team2635.robot;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.IterativeRobot;                                
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Relay;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.buttons.Button;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+
+public class Robot extends IterativeRobot{
+	Button button;
+	Command autonomousCommand;
+	Relay relay;
+	CANTalon motor;
+	CANTalon flywheel;
+	CANTalon frontLeftMotor;
+	CANTalon backLeftMotor;
+	CANTalon frontRightMotor;
+	CANTalon backRightMotor;
+	Joystick leftJoystick;
+	Joystick rightJoystick;
+	RobotDrive drive;
+	ShooterModes shooter;
+	DigitalInput nerfSwitch;
+	ShooterEnabled shooterEnabled;
+	ShooterEnabled ShooterEnabled;
+    SendableChooser chooser;  
+    double wheel;
+    boolean nerfSw;
+	public static OI oi;
+	private static final int NERF_MOTOR_CHANNEL = 7;
+	private static final int NERF_FLYWHEEL_CHANNEL = 1;
+	private static final int NERF_SWITCH_CHANNEL = 1;
+	private static final int LEFT_JOYSTICK_CHANNEL = 1;
+	private static final int RIGHT_JOYSTICK_CHANNEL = 0;
+	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 8;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 5;
+	private static final int BACK_RIGHT_MOTOR_CHANNEL = 9;
+	private static final int BACK_LEFT_MOTOR_CHANNEL = 14;
+
+    public void robotInit(){
+    	shooterEnabled = new ShooterEnabled();
+    	shooterEnabled.isEnabled = false;
+        motor = new CANTalon(NERF_MOTOR_CHANNEL);
+        flywheel = new CANTalon(NERF_FLYWHEEL_CHANNEL); 
+        leftJoystick = new Joystick(LEFT_JOYSTICK_CHANNEL);
+        rightJoystick = new Joystick(RIGHT_JOYSTICK_CHANNEL);
+        button = new JoystickButton(leftJoystick,1);
+        relay = new Relay(0);
+        shooter = new ShooterModes(shooterEnabled);
+        nerfSwitch = new DigitalInput(NERF_SWITCH_CHANNEL);
+        frontLeftMotor = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
+        backLeftMotor = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
+        frontRightMotor = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);	
+        backRightMotor = new CANTalon(BACK_RIGHT_MOTOR_CHANNEL);
+        drive = new RobotDrive(frontLeftMotor,backLeftMotor,frontRightMotor,backRightMotor);
+    }
+
+    public void disabledInit(){
+    	System.out.println("Why did you do that? I just wanted to be your friend!");
+    }
+
+	public void disabledPeriodic(){
+		Scheduler.getInstance().run();
+	}
+
+    public void autonomousInit(){
+        autonomousCommand = (Command) chooser.getSelected();
+        if (autonomousCommand != null) autonomousCommand.start();
+    }
+
+    public void autonomousPeriodic(){
+        Scheduler.getInstance().run();
+    }
+
+    public void teleopInit(){
+        if (autonomousCommand != null) autonomousCommand.cancel();
+    } 
+
+    public void teleopPeriodic(){
+        Scheduler.getInstance().run();
+        nerfSw=false;
+        nerfSw = nerfSwitch.get();
+        wheel=leftJoystick.getRawAxis(2);
+        wheel=Math.abs(wheel);     
+        shooter.setSwitch(nerfSwitch.get());
+        shooter.modeChange(leftJoystick.getRawButton(4),leftJoystick.getRawButton(3),leftJoystick.getRawButton(5));
+        shooter.update(leftJoystick.getRawButton(1));
+        shooterEnabled.isEnabled=true;
+        motor.set(shooter.getMotorSpeed()/2);
+        /*if(joystick.getRawButton(2)){
+        flywheel.set(0.4);
+        }
+        else if(joystick.getRawButton(8)){
+        	flywheel.set(0.0);
+        }
+        else if(joystick.getRawButton(6)){*/
+        	flywheel.set(0.3);
+        /*}
+        else if(joystick.getRawButton(7)){
+        	flywheel.set(0.5);
+        }
+        else{
+        	flywheel.set(wheel/2);
+        }*/
+        System.out.println(wheel);
+        drive.tankDrive(rightJoystick, leftJoystick );	
+    }
+
+    public void testPeriodic(){
+        LiveWindow.run();
+    }
+}

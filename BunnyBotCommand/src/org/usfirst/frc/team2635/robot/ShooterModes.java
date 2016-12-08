@@ -3,12 +3,8 @@ package org.usfirst.frc.team2635.robot;
 import edu.wpi.first.wpilibj.Timer;
 
 public class ShooterModes {
-	private static final double SHOOTER_OFF_TIME = 0.1;
-	private static final double SHOOT_TIME = 100.0E-3;
-	boolean set;
-	
+	boolean set;	
 	int num;
-	
 	ShooterEnabled shooterEnabled;
 	double motorSpeed;
 	int prevMode;
@@ -66,17 +62,15 @@ public class ShooterModes {
 		default:
 			break;
 		}
-	}
-	
+	} 
 	public void singleUpdate (boolean button) {
 		/*if(button && !nerfSwitch) {
 			motorSpeed = 1.0;
 		} else if(!button) {
-			motorSpeed = 0.0;
+			motorSpeed = 0.0; \iwk/xc.znu [i okfeq;lwm,d/s;c
 		} else if (nerfSwitch) {
 			motorSpeed = 0.0;
 		}*/
-		
 		switch (singleShooterState){
 		case INIT:
 			prevMode=0;
@@ -84,7 +78,6 @@ public class ShooterModes {
 				motorSpeed = 1.0;
 				set=false;
 				singleShooterState = singleShooterEnum.SHOOTING;
-				
 			}
 			break;
 		case SHOOTING:
@@ -92,17 +85,11 @@ public class ShooterModes {
 			if (nerfSwitch==false&&set==true){
 				motorSpeed = 0.0;
 				singleShooterState = singleShooterEnum.RESET;
-				System.out.println("Stopped");
-				
+				System.out.println("Stopped");	
 		}
 			else if(nerfSwitch==true) {
 				set=true;
 				}
-			
-		
-			
-		
-			
 			break;
 		case STOP:
 			if (!nerfSwitch){
@@ -111,35 +98,23 @@ public class ShooterModes {
 			break;
 		case RESET:
 			motorSpeed=0.0;
-			
-			if (!button){
-				
+			if (!button){ 
 				set=false;
 				shooterEnabled.isEnabled=false;
 				singleShooterState = singleShooterEnum.INIT;
-			}
-		
+			}	
 		default:
 			break;
 		}
 	}
 		public void burstUpdate (boolean button) {
-			/*if(button && !nerfSwitch) {
-				motorSpeed = 1.0;
-			} else if(!button) {
-				motorSpeed = 0.0;
-			} else if (nerfSwitch) {
-				motorSpeed = 0.0;
-			}*/
-			
 			switch (burstShooterState){
 			case INIT:
 				prevMode=1;
 				if (button&&num<3) {
 					motorSpeed = 1.0;
 					set=false;
-					burstShooterState = burstShooterEnum.SHOOTING;
-					
+					burstShooterState = burstShooterEnum.SHOOTING;	
 				}
 				else if (num>2){
 					num=0;
@@ -156,19 +131,15 @@ public class ShooterModes {
 				if (nerfSwitch==false&&set==true){
 					motorSpeed = 0.0;
 					burstShooterState = burstShooterEnum.RESET;
-					System.out.println("Stopped");
-					
-			}
+					System.out.println("Stopped");	
+				}
 				else if(nerfSwitch==true) {
 					set=true;
 					}
-			
 				else if(!button){
 					motorSpeed=0.0;
 					burstShooterState=burstShooterEnum.INIT;
 				}
-			
-				
 				break;
 			case STOP:
 				if (!nerfSwitch){
@@ -179,7 +150,6 @@ public class ShooterModes {
 				motorSpeed=0.0;
 				if(prevMode!=1){burstShooterState = burstShooterEnum.INIT;};
 				if (button&&num<2){
-					
 					set=false;
 					shooterEnabled.isEnabled=false;
 					num++;
@@ -194,11 +164,9 @@ public class ShooterModes {
 					burstShooterState=burstShooterEnum.INIT;
 					num=0;
 				}
-			
 			default:
 				break;
 			}
-		
 		}
 			public void autoUpdate (boolean button) {
 		switch (autoShooterState){
@@ -208,9 +176,7 @@ public class ShooterModes {
 				motorSpeed = 1.0;
 				set=false;
 				autoShooterState = autoShooterEnum.SHOOTING;
-				
 			}
-			
 			break;
 		case SHOOTING:
 			if(prevMode!=2){autoShooterState = autoShooterEnum.INIT;};
@@ -218,8 +184,7 @@ public class ShooterModes {
 				motorSpeed = 0.0;
 				autoShooterState = autoShooterEnum.RESET;
 				System.out.println("Stopped");
-				
-		}
+			}
 			else if(nerfSwitch==true) {
 				set=true;
 				}
@@ -228,10 +193,6 @@ public class ShooterModes {
 				set=false;
 				motorSpeed=0.0;
 			}
-		
-			
-		
-			
 			break;
 		case STOP:
 			if (!nerfSwitch){
@@ -241,19 +202,10 @@ public class ShooterModes {
 		case RESET:
 			motorSpeed=0.0;
 			if(prevMode!=2){autoShooterState = autoShooterEnum.INIT;};
-			
-				autoShooterState = autoShooterEnum.INIT;
-				set=false;
-				shooterEnabled.isEnabled=false;
-			
-				
-			
-		
-		
+			autoShooterState = autoShooterEnum.INIT;
+			set=false;
+			shooterEnabled.isEnabled=false;
 			break;
 		}
-		}
 	}
-		
-
-
+}
