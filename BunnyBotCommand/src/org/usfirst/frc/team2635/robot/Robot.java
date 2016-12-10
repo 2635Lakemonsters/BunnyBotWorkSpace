@@ -82,10 +82,10 @@ public class Robot extends IterativeRobot{
         angleUnwrapper = new SensorUnwrapper(180.0, new SensorNavxAngle(navx));
         //turntable = new CANTalon(TURNTABLE_MOTOR_CHANNEL);
         //turntableEncoder = new Encoder(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B);
-        table = new Turntable(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B, TURNTABLE_MOTOR_CHANNEL);
+        table = new Turntable(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B, TURNTABLE_MOTOR_CHANNEL, angleUnwrapper.sense(null));
         
-        SmartDashboard.putNumber("Set P", 0);
-        SmartDashboard.putNumber("Set I", 0);
+        SmartDashboard.putNumber("Set P", 0.011);
+        SmartDashboard.putNumber("Set I", 0.001);
         SmartDashboard.putNumber("Set D", 0);
     }
 
@@ -140,9 +140,9 @@ public class Robot extends IterativeRobot{
         drive.tankDrive(rightJoystick, leftJoystick );	
         //turntable.set(shootJoystick.getRawAxis(0));
         
-        table.update(shootJoystick.getRawAxis(0), angleUnwrapper.sense(null));
         table.setPID(SmartDashboard.getNumber("Set P"), SmartDashboard.getNumber("Set I"), SmartDashboard.getNumber("Set D"));
-        
+        table.update(shootJoystick.getRawAxis(0), angleUnwrapper.sense(null));
+                
         SmartDashboard.putNumber("Raw Angle", navx.getAngle());
         SmartDashboard.putNumber("Angle", angleUnwrapper.sense(null));
         //SmartDashboard.putNumber("Encoder Position", turntableEncoder.getDistance());

@@ -1,0 +1,54 @@
+package org.usfirst.frc.team2635.robot;
+
+import edu.wpi.first.wpilibj.CANTalon;
+import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.PIDController;
+import edu.wpi.first.wpilibj.PIDSourceType;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+
+public class Turntable{
+	
+PIDController PID;
+Encoder encoder;
+CANTalon talon;
+
+	public Turntable(int encoderChannelA, int encoderChannelB, int motorChannel){
+		encoder = new Encoder(encoderChannelA, encoderChannelB);
+		encoder.setPIDSourceType(PIDSourceType.kDisplacement);
+		talon = new CANTalon(motorChannel);
+		
+		PID = new PIDController(0, 0, 0, encoder, talon);
+	}
+
+	public void update(double axis, double angle) {
+		double axisscaled = axis;
+		if(axisscaled<0.02&&axisscaled>-.02){axisscaled=0;}
+		axisscaled=axisscaled*10;
+		PID.setSetpoint(PID.getSetpoint()+axisscaled);
+		PID.enable();
+		SmartDashboard.putNumber("setpoint", PID.getSetpoint());
+		SmartDashboard.putNumber("error", PID.getError());
+		SmartDashboard.putNumber("sensor position", encoder.getDistance());
+	}
+	
+	public void setPID(double p, double i, double d) {
+		PID.setPID(p, i, d);
+		SmartDashboard.putNumber("get p", PID.getP());
+
+	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
