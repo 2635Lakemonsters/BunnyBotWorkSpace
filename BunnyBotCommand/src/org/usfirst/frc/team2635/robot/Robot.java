@@ -20,7 +20,7 @@ import edu.wpi.first.wpilibj.SerialPort;
 import com.lakemonsters2635.sensor.modules.SensorUnwrapper;
 
 public class Robot extends IterativeRobot{
-	
+	int autoLoop = 0;
 	Button button;
 	Command autonomousCommand;
 	Relay relay;
@@ -103,8 +103,37 @@ public class Robot extends IterativeRobot{
     }
 
     public void autonomousPeriodic(){
-        Scheduler.getInstance().run();
-    }
+    	if (autoLoop < 25)
+    	{
+    		drive.tankDrive(0.0, 0.5);
+    		autoLoop++;
+    	}
+    	else if (autoLoop < 100 && autoLoop >= 25) {
+    		drive.tankDrive(0.5, 0.5);
+    		autoLoop++;
+    	}
+    	else if (autoLoop >= 100 && autoLoop < 125) {
+    		
+    		drive.tankDrive(0.75,0.0);
+    				autoLoop++;
+    	}
+    	else if (autoLoop < 300 && autoLoop >= 125) {
+    		drive.tankDrive(0.75, 0.75);
+    		autoLoop++;
+    	}
+		else if (autoLoop >= 300 && autoLoop < 425) {
+			drive.tankDrive(0.4, 0.85);
+			autoLoop++;
+		}
+		else if (autoLoop >= 425 && autoLoop < 600) {
+			drive.tankDrive(0.75, 0.75);
+			autoLoop++;
+		}
+		else if (autoLoop >= 600 && autoLoop < 725){
+			drive.tankDrive(0.85, 0.4);
+			autoLoop++;
+		}
+    	}
 
     public void teleopInit(){
         if (autonomousCommand != null) autonomousCommand.cancel();
