@@ -66,19 +66,19 @@ public class Robot extends IterativeRobot {
     		myRobot.setLeftRightMotorOutputs(0.75, 0.75);
     		autoLoop++;
     	}
-    		else if (autoLoop >= 300 && autoLoop < 425) {
-    			myRobot.setLeftRightMotorOutputs(0.4, 0.85);
-    			autoLoop++;
-    		}
-    		else if (autoLoop >= 425 && autoLoop < 600) {
-    			myRobot.setLeftRightMotorOutputs(0.75, 0.75);
-    			autoLoop++;
-    		}
-    		else if (autoLoop >= 600 && autoLoop < 725){
-    			myRobot.setLeftRightMotorOutputs(0.85, 0.4);
-    			autoLoop++;
-    		}
-    	}
+		else if (autoLoop >= 300 && autoLoop < 425) {
+			myRobot.setLeftRightMotorOutputs(0.4, 0.85);
+			autoLoop++;
+		}
+		else if (autoLoop >= 425 && autoLoop < 600) {
+			myRobot.setLeftRightMotorOutputs(0.75, 0.75);
+			autoLoop++;
+		}
+		else if (autoLoop >= 600 && autoLoop < 725){
+			myRobot.setLeftRightMotorOutputs(0.85, 0.4);
+			autoLoop++;
+		}
+    }
     	/*if(autoLoopCounter < 250) //Check if we've completed 100 loops (approximately 2 seconds)
 		{
 			myRobot.drive(-0.75, 0.0); 	// drive forwards half speed
