@@ -5,6 +5,7 @@
 		<item value="false" key="WizardProjectsImportPage.STORE_COPY_PROJECT_ID"/>
 		<item value="false" key="WizardProjectsImportPage.STORE_ARCHIVE_SELECTED"/>
 		<list key="WizardProjectsImportPage.STORE_DIRECTORIES">
+			<item value="C:\Users\LakeM\BunnyBotWorkSpace"/>
 			<item value="C:\Users\LakeM\BunnyBotWorkSpace\LakeLib"/>
 			<item value="C:\Users\LakeM\Archived Workspace\LakeLib"/>
 			<item value="C:\Users\LakeM\navx-mxp\java\examples\RotateToAngle"/>

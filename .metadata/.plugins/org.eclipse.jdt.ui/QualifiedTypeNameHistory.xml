@@ -3,8 +3,10 @@
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Relay.Value"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.DigitalInput"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SmartDashboard"/>
 <fullyQualifiedTypeName name="com.kauailabs.navx.frc.AHRS"/>
-<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.CANTalon"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.PIDController"/>
 <fullyQualifiedTypeName name="edu.wpi.first.wpilibj.Encoder"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.CANTalon"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.PIDSourceType"/>
+<fullyQualifiedTypeName name="edu.wpi.first.wpilibj.smartdashboard.SmartDashboard"/>
 </qualifiedTypeNameHistroy>

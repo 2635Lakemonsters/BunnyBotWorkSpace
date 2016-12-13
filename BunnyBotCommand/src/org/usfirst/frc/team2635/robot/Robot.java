@@ -55,27 +55,30 @@ public class Robot extends IterativeRobot {
 	double wheel;
 	boolean nerfSw;
 	public static OI oi;
-	private static final int NERF_MOTOR_CHANNEL = 7;
-	private static final int NERF_FLYWHEEL_CHANNEL = 1;
-	private static final int NERF_SWITCH_CHANNEL = 0;
+	private static final int NERF_MOTOR_CHANNEL = 98;
+	private static final int NERF_FLYWHEEL_CHANNEL = 99;
+	private static final int NERF_SWITCH_CHANNEL = 2;
+	private static final int NERF_SWITCH_CHANNEL2 = 3;
 	private static final int LEFT_JOYSTICK_CHANNEL = 1;
 	private static final int RIGHT_JOYSTICK_CHANNEL = 0;
 	private static final int SHOOT_JOYSTICK_CHANNEL = 2;
-	private static final int TURNTABLE_MOTOR_CHANNEL = 15;
-	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 12;
-	private static final int FRONT_LEFT_MOTOR_CHANNEL = 6;
-	private static final int BACK_RIGHT_MOTOR_CHANNEL = 4;
-	private static final int BACK_LEFT_MOTOR_CHANNEL = 9;
-	private static final int ENCODER_CHANNEL_A = 1;
-	private static final int ENCODER_CHANNEL_B = 2;
+	private static final int TURNTABLE_MOTOR_CHANNEL = 7;
+	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 9;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 1;
+	private static final int BACK_RIGHT_MOTOR_CHANNEL = 8;
+	private static final int BACK_LEFT_MOTOR_CHANNEL = 2;
+	private static final int ENCODER_CHANNEL_A = 0;
+	private static final int ENCODER_CHANNEL_B = 1;
 
 	public void robotInit() {
 		shooterEnabled = new ShooterEnabled();
 		shooterEnabled.isEnabled = false;
 		motor = new CANTalon(NERF_MOTOR_CHANNEL);
 		flywheel = new CANTalon(NERF_FLYWHEEL_CHANNEL);
+		
 		leftJoystick = new Joystick(LEFT_JOYSTICK_CHANNEL);
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_CHANNEL);
+		
 		shootJoystick = new Joystick(SHOOT_JOYSTICK_CHANNEL);
 		button = new JoystickButton(leftJoystick, 1);
 		relay = new Relay(0);
@@ -150,9 +153,10 @@ public class Robot extends IterativeRobot {
 		angleController.disable();
 		angleController.reset();
 	}
-	long prevTime = System.currentTimeMillis();
+	//long prevTime = System.currentTimeMillis();
 	
 	public void autonomousPeriodic() {
+		
 		int nextCount = 0;
 		int startCount = 0;
 		
@@ -169,7 +173,18 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Error", angleController.getError());
 		SmartDashboard.putNumber("setpoint", angleController.getSetpoint());
 	
+		//nextCount = end(startCount);
+		
+		//autoLoop++;	
+//		long currentTime = System.currentTimeMillis();
+//		System.out.println("autoLoop: " + autoLoop);
+//		System.out.println("Time delta: " + ((Long)currentTime-prevTime));
+//		prevTime = currentTime;
+	
 	}
+	
+	
+
 	
 	@Override
 	public void teleopInit() {
@@ -203,8 +218,9 @@ public class Robot extends IterativeRobot {
 		 * flywheel.set(wheel/2); }
 		 */
 		//System.out.println(wheel);
-		// drive.tankDrive(rightJoystick, leftJoystick ); //Uncomment this and comment the line below to use drive station controllers.
-		drive.arcadeDrive(rightJoystick.getRawAxis(1), -rightJoystick.getRawAxis(0)); // This is if you're using xbox controller to control drive
+		drive.tankDrive(rightJoystick, leftJoystick ); //Uncomment this and comment the line below to use drive station controllers.
+		
+		//drive.arcadeDrive(rightJoystick.getRawAxis(1), rightJoystick.getRawAxis(0)); // This is if you're using xbox controller to control drive
 		// turntable.set(shootJoystick.getRawAxis(0));
 
 		table.setPID(SmartDashboard.getNumber("Set P"), SmartDashboard.getNumber("Set I"),
@@ -221,7 +237,7 @@ public class Robot extends IterativeRobot {
 	public void testPeriodic() {
 		LiveWindow.run();
 	}
-
+	Timer timer = new Timer();
 	public void forward(/*int startCount,*/ double distance) {
 		//CountPerDistance assumes a 20 ms loop time.
 		int finishCount = (int)((distance / COUNTPERDISTANCE) * 20);
@@ -302,6 +318,13 @@ public class Robot extends IterativeRobot {
 		pidDrive.setForward(0);
 		Timer timer = new Timer(); 
 
+	public int turnRight(int startCount) {
+		int finishCount = (int) (startCount * 20 + 40 * 20);
+		double time = timer.get() * 1000;
+		if (time < finishCount && time >= startCount) {
+			drive.tankDrive(0.5, -0.5);
+			System.out.println("right: startCount: " + startCount + " finishCount: " + finishCount);
+
 
 		timer.start();
 		while(timer.get() * 1000 < 2000) {}
@@ -311,4 +334,16 @@ public class Robot extends IterativeRobot {
 		//Wait untill the angle is within 5.0 degrees of the target angle.
 //		while(Math.abs(angleController.getError()) > 5.0){}
 	}
+	
+	public int end(int startCount)
+	{
+		double time = timer.get() * 1000;
+		
+		if(time > startCount)
+		{
+			drive.tankDrive(0, 0);
+		}
+		return startCount;
+	}
+	
 }
