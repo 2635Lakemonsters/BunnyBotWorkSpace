@@ -13,7 +13,7 @@ Encoder encoder;
 CANTalon talon;
 double deltaanglescaled;
 double prevanglescaled;
-private static final double TurntableGearRatio=523.3846153846/360.0;	//counts per revolution divided by degrees per revolution
+private static final double TurntableGearRatio=770.0/360.0;	//counts per revolution divided by degrees per revolution
 
 	public Turntable(int encoderChannelA, int encoderChannelB, int motorChannel, double angle){
 		encoder = new Encoder(encoderChannelA, encoderChannelB);
@@ -34,7 +34,7 @@ private static final double TurntableGearRatio=523.3846153846/360.0;	//counts pe
 		
 		axisscaled=axisscaled*10;
 		deltaanglescaled=angle*TurntableGearRatio-prevanglescaled;
-		PID.setSetpoint(PID.getSetpoint()+axisscaled-deltaanglescaled);
+		PID.setSetpoint(PID.getSetpoint()+axisscaled+deltaanglescaled);
 		prevanglescaled=angle*TurntableGearRatio;
 		SmartDashboard.putNumber("setpoint", PID.getSetpoint());
 		SmartDashboard.putNumber("error", PID.getError());
