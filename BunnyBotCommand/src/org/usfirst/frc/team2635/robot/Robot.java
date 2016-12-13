@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.PIDController;
 import edu.wpi.first.wpilibj.Relay;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.buttons.Button;
@@ -17,6 +18,8 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.SerialPort;
+import edu.wpi.first.wpilibj.Timer;
+
 import com.lakemonsters2635.sensor.modules.SensorUnwrapper;
 
 public class Robot extends IterativeRobot {
@@ -45,6 +48,10 @@ public class Robot extends IterativeRobot {
 	SensorUnwrapper angleUnwrapper;
 	CANTalon turntable;
 	Turntable table;
+	PIDDrive pidDrive;
+	PIDController angleController;
+	
+	
 	double wheel;
 	boolean nerfSw;
 	public static OI oi;
@@ -89,6 +96,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Set P", 0.011);
 		SmartDashboard.putNumber("Set I", 0.001);
 		SmartDashboard.putNumber("Set D", 0);
+		
+		SmartDashboard.putNumber("Set PAuto", -0.015);
+		SmartDashboard.putNumber("Set IAuto", -0.0007);
+		SmartDashboard.putNumber("Set DAuto", -0.0);
+
+		pidDrive = new PIDDrive(drive);
+		angleController = new PIDController(-0.015, -0.0001, -0.0, angleUnwrapper, pidDrive);
+		
 	}
 
 	public void disabledInit() {
@@ -101,30 +116,69 @@ public class Robot extends IterativeRobot {
 
 	public void autonomousInit() {
 		autoLoop = 0;
-
+		angleController.setPID(SmartDashboard.getNumber("Set PAuto"), SmartDashboard.getNumber("Set IAuto"), SmartDashboard.getNumber("Set DAuto"));
+		angleController.enable();
+		
+		forward(20);
+		
+		turnRight();
+		
+		forward(9);
+		
+		turnLeft();
+		
+		forward(25);
+		
+		turnLeft();
+		
+		forward(9);
+		
+		turnLeft();
+		
+		forward(20);
+		
+		turnLeft();
+		
+		forward(9); 
+		
+		turnRight();
+		
+		forward(20);
+		
+		stop();
+		
+		angleController.disable();
+		angleController.reset();
 	}
 	long prevTime = System.currentTimeMillis();
+	
 	public void autonomousPeriodic() {
 		int nextCount = 0;
 		int startCount = 0;
 		
-		nextCount = forward(startCount, 20);
+		/*nextCount = forward(startCount, 20);
 		nextCount = stop(nextCount);
-		nextCount = turnRight(nextCount);
-		nextCount = forward(nextCount, 9);
-		nextCount = stop(nextCount);
-		nextCount = turnLeft(nextCount);
-		nextCount = forward(nextCount, 20);
+		*/
+//		nextCount = forward(nextCount, 9);
+//		nextCount = stop(nextCount);
+//		nextCount = turnLeft(nextCount);
+//		nextCount = forward(nextCount, 20);
+		
 		autoLoop++;	
-		long currentTime = System.currentTimeMillis();
-		System.out.println("autoLoop: " + autoLoop);
-		System.out.println("Time delta: " + ((Long)currentTime-prevTime));
-		prevTime = currentTime;
+		SmartDashboard.putNumber("Angle", angleUnwrapper.sense(null));
+		SmartDashboard.putNumber("Error", angleController.getError());
+		SmartDashboard.putNumber("setpoint", angleController.getSetpoint());
+	
 	}
-
+	
+	@Override
 	public void teleopInit() {
 		if (autonomousCommand != null)
+		{
 			autonomousCommand.cancel();
+		}
+		angleController.disable();
+		
 	}
 
 	// Scheduler.getInstance().run();
@@ -143,14 +197,14 @@ public class Robot extends IterativeRobot {
 		 * if(joystick.getRawButton(8)){ flywheel.set(0.0); } else
 		 * if(joystick.getRawButton(6)){
 		 */
-		flywheel.set(0.3);
+		//flywheel.set(0.3);
 		/*
 		 * } else if(joystick.getRawButton(7)){ flywheel.set(0.5); } else{
 		 * flywheel.set(wheel/2); }
 		 */
-		System.out.println(wheel);
+		//System.out.println(wheel);
 		// drive.tankDrive(rightJoystick, leftJoystick ); //Uncomment this and comment the line below to use drive station controllers.
-		drive.arcadeDrive(rightJoystick.getRawAxis(1), rightJoystick.getRawAxis(0)); // This is if you're using xbox controller to control drive
+		drive.arcadeDrive(rightJoystick.getRawAxis(1), -rightJoystick.getRawAxis(0)); // This is if you're using xbox controller to control drive
 		// turntable.set(shootJoystick.getRawAxis(0));
 
 		table.setPID(SmartDashboard.getNumber("Set P"), SmartDashboard.getNumber("Set I"),
@@ -168,51 +222,93 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 	}
 
-	public int forward(int startCount, double distance) {
-		int finishCount = (int)(startCount+distance / COUNTPERDISTANCE);
+	public void forward(/*int startCount,*/ double distance) {
+		//CountPerDistance assumes a 20 ms loop time.
+		int finishCount = (int)((distance / COUNTPERDISTANCE) * 20);
+//		if (autoLoop < finishCount && autoLoop >= startCount) {
+//			angleController.setSetpoint(angleUnwrapper.sense(null));
+//			pidDrive.setForward(1);
+//			System.out.println("forward: startCount: " + startCount + " finishCount: " + finishCount);
+//
+//			//autoLoop++;
+//		}
+//		
+		angleController.setSetpoint(angleUnwrapper.sense(null));
+		pidDrive.setForward(1);
+		Timer timer = new Timer(); 
 
-		if (autoLoop < finishCount && autoLoop >= startCount) {
-			drive.tankDrive(1, 1);
-			System.out.println("forward: startCount: " + startCount + " finishCount: " + finishCount);
 
-			//autoLoop++;
-		}
-		return finishCount;
-	}
-
-	public int stop(int startCount) {
-
-		int finishCount = (int) (startCount+12);
-		if (autoLoop < finishCount && autoLoop >= startCount) {
-			drive.tankDrive(-1, -1);
-			System.out.println("stop: startCount: " + startCount + " finishCount: " + finishCount);
-
-			//autoLoop++;
-		}
-		return finishCount;
-	}
-
-	public int turnLeft(int startCount) {
+		timer.start();
+		while(timer.get() * 1000 < finishCount) {}
 		
-		int finishCount = (int) (startCount+40);
-		if (autoLoop < finishCount && autoLoop >= startCount) {
-			drive.tankDrive(-0.5, 0.5);
-			System.out.println("left: startCount: " + startCount + " finishCount: " + finishCount);
-
-			//autoLoop++;
-		}
-		return finishCount;
-
+		timer.stop();
+		timer.reset();
+		
+		//return finishCount;
+		
 	}
 
-	public int turnRight(int startCount) {
-		int finishCount = (int) (startCount+40);
-		if (autoLoop < finishCount && autoLoop >= startCount) {
-			drive.tankDrive(0.5, -0.5);
-			System.out.println("right: startCount: " + startCount + " finishCount: " + finishCount);
+	public void stop(/*int startCount*/) {
 
-			//autoLoop++;
-		}
-		return finishCount;
+//		int finishCount = (int) (startCount+12);
+//		if (autoLoop < finishCount && autoLoop >= startCount) {
+//			pidDrive.setForward(-1);
+//			System.out.println("stop: startCount: " + startCount + " finishCount: " + finishCount);
+//
+//			//autoLoop++;
+//		}
+//		return finishCount;
+		angleController.setSetpoint(angleUnwrapper.sense(null));
+		pidDrive.setForward(0);
+	}
+
+	public void turnLeft(/*int startCount*/) {
+		
+//		int finishCount = (int) (startCount+40);
+//		if (autoLoop < finishCount && autoLoop >= startCount) {
+//			angleController.setSetpoint(angleUnwrapper.sense(null) - 90); 
+//			pidDrive.setForward(0);
+//			System.out.println("left: startCount: " + startCount + " finishCount: " + finishCount);
+//
+//			//autoLoop++;
+//		}
+//		return finishCount;
+		angleController.setSetpoint(angleUnwrapper.sense(null) - 90); 
+		pidDrive.setForward(0.0);
+		Timer timer = new Timer(); 
+
+
+		timer.start();
+		while(timer.get() * 1000 < 2000) {}
+		
+		timer.stop();
+		timer.reset();
+		//Wait untill the angle is within 5.0 degrees of the target angle.
+//		while(Math.abs(angleController.getError()) > 5.0){}
+	}
+
+	public void turnRight(/*int startCount*/) {
+//		int finishCount = (int) (startCount);
+//		if (autoLoop < finishCount && autoLoop >= startCount) {
+//			angleController.setSetpoint(angleUnwrapper.sense(null) + 90);
+//			pidDrive.setForward(0);
+//			System.out.println("right: startCount: " + startCount + " finishCount: " + finishCount);
+//
+//			//autoLoop++;
+//		}
+//		return finishCount;
+		
+		angleController.setSetpoint(angleUnwrapper.sense(null) + 90);
+		pidDrive.setForward(0);
+		Timer timer = new Timer(); 
+
+
+		timer.start();
+		while(timer.get() * 1000 < 2000) {}
+		
+		timer.stop();
+		timer.reset();	
+		//Wait untill the angle is within 5.0 degrees of the target angle.
+//		while(Math.abs(angleController.getError()) > 5.0){}
 	}
 }
