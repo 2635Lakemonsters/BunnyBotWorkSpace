@@ -28,8 +28,10 @@ public class Robot extends IterativeRobot {
 	Button button;
 	Command autonomousCommand;
 	Relay relay;
-	CANTalon motor;
-	CANTalon flywheel;
+	CANTalon motorLeft;
+	CANTalon motorRight;
+	CANTalon flywheelLeft;
+	CANTalon flywheelRight;
 	CANTalon frontLeftMotor;
 	CANTalon backLeftMotor;
 	CANTalon frontRightMotor;
@@ -38,8 +40,10 @@ public class Robot extends IterativeRobot {
 	Joystick rightJoystick;
 	Joystick shootJoystick;
 	RobotDrive drive;
-	ShooterModes shooter;
-	DigitalInput nerfSwitch;
+	ShooterModes shooterLeft;
+	ShooterModes shooterRight;
+	DigitalInput nerfSwitchLeft;
+	DigitalInput nerfSwitchRight;
 	Encoder turntableEncoder;
 	ShooterEnabled shooterEnabled;
 	ShooterEnabled ShooterEnabled;
@@ -50,31 +54,38 @@ public class Robot extends IterativeRobot {
 	Turntable table;
 	PIDDrive pidDrive;
 	PIDController angleController;
+	Bling bling;
+	
 	
 	
 	double wheel;
-	boolean nerfSw;
+	boolean nerfSwLeft;
+	boolean nerfSwRight;
 	public static OI oi;
-	private static final int NERF_MOTOR_CHANNEL = 98;
-	private static final int NERF_FLYWHEEL_CHANNEL = 99;
-	private static final int NERF_SWITCH_CHANNEL = 2;
-	private static final int NERF_SWITCH_CHANNEL2 = 3;
+	private static final int NERF_MOTOR_LEFT = 6;
+	private static final int NERF_FLYWHEEL_LEFT = 5;
+	private static final int NERF_MOTOR_RIGHT = 3;
+	private static final int NERF_FLYWHEEL_RIGHT = 4;
+	private static final int NERF_SWITCH_LEFT = 2;
+	private static final int NERF_SWITCH_RIGHT = 3;
 	private static final int LEFT_JOYSTICK_CHANNEL = 1;
 	private static final int RIGHT_JOYSTICK_CHANNEL = 0;
 	private static final int SHOOT_JOYSTICK_CHANNEL = 2;
 	private static final int TURNTABLE_MOTOR_CHANNEL = 7;
-	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 9;
-	private static final int FRONT_LEFT_MOTOR_CHANNEL = 1;
-	private static final int BACK_RIGHT_MOTOR_CHANNEL = 8;
-	private static final int BACK_LEFT_MOTOR_CHANNEL = 2;
+	private static final int FRONT_RIGHT_MOTOR_CHANNEL = 8;
+	private static final int FRONT_LEFT_MOTOR_CHANNEL = 2;
+	private static final int BACK_RIGHT_MOTOR_CHANNEL = 9;
+	private static final int BACK_LEFT_MOTOR_CHANNEL = 1;
 	private static final int ENCODER_CHANNEL_A = 0;
 	private static final int ENCODER_CHANNEL_B = 1;
 
 	public void robotInit() {
 		shooterEnabled = new ShooterEnabled();
 		shooterEnabled.isEnabled = false;
-		motor = new CANTalon(NERF_MOTOR_CHANNEL);
-		flywheel = new CANTalon(NERF_FLYWHEEL_CHANNEL);
+		motorLeft = new CANTalon(NERF_MOTOR_LEFT);
+		flywheelLeft = new CANTalon(NERF_FLYWHEEL_LEFT);
+		motorRight = new CANTalon(NERF_MOTOR_RIGHT);
+		flywheelRight = new CANTalon(NERF_FLYWHEEL_RIGHT);
 		
 		leftJoystick = new Joystick(LEFT_JOYSTICK_CHANNEL);
 		rightJoystick = new Joystick(RIGHT_JOYSTICK_CHANNEL);
@@ -82,8 +93,10 @@ public class Robot extends IterativeRobot {
 		shootJoystick = new Joystick(SHOOT_JOYSTICK_CHANNEL);
 		button = new JoystickButton(leftJoystick, 1);
 		relay = new Relay(0);
-		shooter = new ShooterModes(shooterEnabled);
-		nerfSwitch = new DigitalInput(NERF_SWITCH_CHANNEL);
+		shooterLeft = new ShooterModes();
+		shooterRight = new ShooterModes();
+		nerfSwitchLeft = new DigitalInput(NERF_SWITCH_LEFT);
+		nerfSwitchRight = new DigitalInput(NERF_SWITCH_RIGHT);
 		frontLeftMotor = new CANTalon(FRONT_LEFT_MOTOR_CHANNEL);
 		backLeftMotor = new CANTalon(BACK_LEFT_MOTOR_CHANNEL);
 		frontRightMotor = new CANTalon(FRONT_RIGHT_MOTOR_CHANNEL);
@@ -95,6 +108,7 @@ public class Robot extends IterativeRobot {
 		// turntableEncoder = new Encoder(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B);
 		table = new Turntable(ENCODER_CHANNEL_A, ENCODER_CHANNEL_B, TURNTABLE_MOTOR_CHANNEL,
 				angleUnwrapper.sense(null));
+		bling = new Bling();
 
 		SmartDashboard.putNumber("Set P", 0.011);
 		SmartDashboard.putNumber("Set I", 0.001);
@@ -107,6 +121,7 @@ public class Robot extends IterativeRobot {
 		pidDrive = new PIDDrive(drive);
 		angleController = new PIDController(-0.015, -0.0001, -0.0, angleUnwrapper, pidDrive);
 		
+		bling.set(0);
 	}
 
 	public void disabledInit() {
@@ -197,16 +212,35 @@ public class Robot extends IterativeRobot {
 	}
 
 	// Scheduler.getInstance().run();
-	public void teleopPeriodic() {
-		nerfSw = false;
-		nerfSw = nerfSwitch.get();
+	public void teleopPeriodic() 
+	{
+		
+		if (shootJoystick.getRawButton(4)){
+			flywheelLeft.set(.4);
+			flywheelRight.set(.4);
+		} else {
+			flywheelLeft.set(.3);
+			flywheelRight.set(.3);
+		}
+		
+		
 		wheel = leftJoystick.getRawAxis(2);
-		wheel = Math.abs(wheel);
-		shooter.setSwitch(nerfSwitch.get());
-		shooter.modeChange(leftJoystick.getRawButton(4), leftJoystick.getRawButton(3), leftJoystick.getRawButton(5));
-		shooter.update(leftJoystick.getRawButton(1));
-		shooterEnabled.isEnabled = true;
-		motor.set(shooter.getMotorSpeed() / 2);
+		shooterLeft.setSwitch(nerfSwitchLeft.get());
+		
+		shooterLeft.modeChange(shootJoystick.getRawButton(3), shootJoystick.getRawButton(1), shootJoystick.getRawButton(2));
+		shooterLeft.update(shootJoystick.getRawAxis(2) > .5);
+		
+		motorLeft.set(shooterLeft.getMotorSpeed() / 2);
+		shooterRight.setSwitch(!nerfSwitchRight.get());
+		shooterRight.modeChange(shootJoystick.getRawButton(3), shootJoystick.getRawButton(1), shootJoystick.getRawButton(2));
+		shooterRight.update(shootJoystick.getRawAxis(3) > .5);
+		motorRight.set(shooterRight.getMotorSpeed() / 2);
+		
+	    if (shooterLeft.getBling() == 1 || shooterRight.getBling() == 1) {
+	    	bling.set(1);
+	    } else {
+	    	bling.set(0);
+	    }
 		/*
 		 * if(joystick.getRawButton(2)){ flywheel.set(0.4); } else
 		 * if(joystick.getRawButton(8)){ flywheel.set(0.0); } else
@@ -218,7 +252,7 @@ public class Robot extends IterativeRobot {
 		 * flywheel.set(wheel/2); }
 		 */
 		//System.out.println(wheel);
-		drive.tankDrive(rightJoystick, leftJoystick ); //Uncomment this and comment the line below to use drive station controllers.
+		drive.tankDrive(-rightJoystick.getRawAxis(1), -leftJoystick.getRawAxis(1) ); //Uncomment this and comment the line below to use drive station controllers.
 		
 		//drive.arcadeDrive(rightJoystick.getRawAxis(1), rightJoystick.getRawAxis(0)); // This is if you're using xbox controller to control drive
 		// turntable.set(shootJoystick.getRawAxis(0));
@@ -229,6 +263,9 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putNumber("Raw Angle", navx.getAngle());
 		SmartDashboard.putNumber("Angle", angleUnwrapper.sense(null));
+		SmartDashboard.putBoolean("Left Switch", nerfSwitchLeft.get());
+		SmartDashboard.putBoolean("Right Switch", nerfSwitchRight.get());
+		
 		// SmartDashboard.putNumber("Encoder Position",
 		// turntableEncoder.getDistance());
 		// SmartDashboard.putNumber("Encoder Rate", turntableEncoder.getRate());
@@ -316,34 +353,24 @@ public class Robot extends IterativeRobot {
 		
 		angleController.setSetpoint(angleUnwrapper.sense(null) + 90);
 		pidDrive.setForward(0);
-		Timer timer = new Timer(); 
-
-	public int turnRight(int startCount) {
-		int finishCount = (int) (startCount * 20 + 40 * 20);
-		double time = timer.get() * 1000;
-		if (time < finishCount && time >= startCount) {
-			drive.tankDrive(0.5, -0.5);
-			System.out.println("right: startCount: " + startCount + " finishCount: " + finishCount);
-
-
+		Timer timer = new Timer();
 		timer.start();
 		while(timer.get() * 1000 < 2000) {}
 		
 		timer.stop();
 		timer.reset();	
-		//Wait untill the angle is within 5.0 degrees of the target angle.
-//		while(Math.abs(angleController.getError()) > 5.0){}
+
 	}
+
 	
-	public int end(int startCount)
-	{
-		double time = timer.get() * 1000;
-		
-		if(time > startCount)
-		{
-			drive.tankDrive(0, 0);
-		}
-		return startCount;
-	}
+//	public void end(int startCount)
+//	{
+//		double time = timer.get() * 1000;
+//		
+//		if(time > startCount)
+//		{
+//			drive.tankDrive(0, 0);
+//		}
+//	}
 	
 }

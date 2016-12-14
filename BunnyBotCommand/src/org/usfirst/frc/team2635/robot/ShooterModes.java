@@ -5,9 +5,10 @@ import edu.wpi.first.wpilibj.Timer;
 public class ShooterModes {
 	boolean set;	
 	int num;
-	ShooterEnabled shooterEnabled;
+	//ShooterEnabled shooterEnabled;
 	double motorSpeed;
 	int prevMode;
+	int blingScene = 0;
 	public double getMotorSpeed() {
 		return motorSpeed;
 	}
@@ -22,10 +23,10 @@ public class ShooterModes {
 	modesEnum modesState = modesEnum.SINGLE;
 	boolean nerfSwitch;
 	
-	public ShooterModes(ShooterEnabled shEnabled) {
+	public ShooterModes() {
 		super();
 		prevMode=0;
-		shooterEnabled=shEnabled;
+		//shooterEnabled=shEnabled;
 		shooterTimer = new Timer();
 	}
 	
@@ -78,6 +79,7 @@ public class ShooterModes {
 				motorSpeed = 1.0;
 				set=false;
 				singleShooterState = singleShooterEnum.SHOOTING;
+				blingScene = 1;
 			}
 			break;
 		case SHOOTING:
@@ -86,6 +88,7 @@ public class ShooterModes {
 				motorSpeed = 0.0;
 				singleShooterState = singleShooterEnum.RESET;
 				System.out.println("Stopped");	
+				blingScene = 0;
 		}
 			else if(nerfSwitch==true) {
 				set=true;
@@ -100,7 +103,7 @@ public class ShooterModes {
 			motorSpeed=0.0;
 			if (!button){ 
 				set=false;
-				shooterEnabled.isEnabled=false;
+				//shooterEnabled.isEnabled=false;
 				singleShooterState = singleShooterEnum.INIT;
 			}	
 		default:
@@ -115,15 +118,18 @@ public class ShooterModes {
 					motorSpeed = 1.0;
 					set=false;
 					burstShooterState = burstShooterEnum.SHOOTING;	
+					blingScene = 1;
 				}
 				else if (num>2){
 					num=0;
 					motorSpeed=0.0;
+					blingScene = 0;
 				}
 				else if(!button){
 					motorSpeed=0.0;
 					burstShooterState=burstShooterEnum.INIT;
 					num=0;
+					blingScene = 0;
 				}
 				break;
 			case SHOOTING:
@@ -132,6 +138,7 @@ public class ShooterModes {
 					motorSpeed = 0.0;
 					burstShooterState = burstShooterEnum.RESET;
 					System.out.println("Stopped");	
+					blingScene = 0;
 				}
 				else if(nerfSwitch==true) {
 					set=true;
@@ -139,6 +146,7 @@ public class ShooterModes {
 				else if(!button){
 					motorSpeed=0.0;
 					burstShooterState=burstShooterEnum.INIT;
+					blingScene = 0;
 				}
 				break;
 			case STOP:
@@ -151,18 +159,21 @@ public class ShooterModes {
 				if(prevMode!=1){burstShooterState = burstShooterEnum.INIT;};
 				if (button&&num<2){
 					set=false;
-					shooterEnabled.isEnabled=false;
+					//shooterEnabled.isEnabled=false;
 					num++;
 					burstShooterState = burstShooterEnum.INIT;
+					blingScene = 0;
 				}
 				else if(num>3){
 					num=0;
 					motorSpeed=0.0;
+					blingScene = 0;
 				}
 				else if(!button){
 					motorSpeed=0.0;
 					burstShooterState=burstShooterEnum.INIT;
 					num=0;
+					blingScene = 0;
 				}
 			default:
 				break;
@@ -176,6 +187,7 @@ public class ShooterModes {
 				motorSpeed = 1.0;
 				set=false;
 				autoShooterState = autoShooterEnum.SHOOTING;
+				blingScene = 1;
 			}
 			break;
 		case SHOOTING:
@@ -184,6 +196,7 @@ public class ShooterModes {
 				motorSpeed = 0.0;
 				autoShooterState = autoShooterEnum.RESET;
 				System.out.println("Stopped");
+				blingScene = 0;
 			}
 			else if(nerfSwitch==true) {
 				set=true;
@@ -192,6 +205,7 @@ public class ShooterModes {
 				autoShooterState=autoShooterEnum.INIT;
 				set=false;
 				motorSpeed=0.0;
+				blingScene = 0;
 			}
 			break;
 		case STOP:
@@ -204,8 +218,12 @@ public class ShooterModes {
 			if(prevMode!=2){autoShooterState = autoShooterEnum.INIT;};
 			autoShooterState = autoShooterEnum.INIT;
 			set=false;
-			shooterEnabled.isEnabled=false;
+			//shooterEnabled.isEnabled=false;
+			blingScene = 0;
 			break;
 		}
+	}
+	public int getBling() {
+		return blingScene;
 	}
 }

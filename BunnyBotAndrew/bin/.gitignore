@@ -1,1 +1,11 @@
 /bin/
+/.classpath
+/.gitignore
+/.project
+/build/
+/build.properties
+/build.xml
+/dist/
+/org/
+/src/
+/sysProps.xml
