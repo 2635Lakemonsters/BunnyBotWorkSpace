@@ -208,7 +208,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		}
 		angleController.disable();
-		
+		drive.arcadeDrive(0, 0);
 	}
 
 	// Scheduler.getInstance().run();
@@ -252,7 +252,7 @@ public class Robot extends IterativeRobot {
 		 * flywheel.set(wheel/2); }
 		 */
 		//System.out.println(wheel);
-		drive.tankDrive(-rightJoystick.getRawAxis(1), -leftJoystick.getRawAxis(1) ); //Uncomment this and comment the line below to use drive station controllers.
+		drive.arcadeDrive(-rightJoystick.getRawAxis(1), -rightJoystick.getRawAxis(0) * 0.75); //Uncomment this and comment the line below to use drive station controllers.
 		
 		//drive.arcadeDrive(rightJoystick.getRawAxis(1), rightJoystick.getRawAxis(0)); // This is if you're using xbox controller to control drive
 		// turntable.set(shootJoystick.getRawAxis(0));
