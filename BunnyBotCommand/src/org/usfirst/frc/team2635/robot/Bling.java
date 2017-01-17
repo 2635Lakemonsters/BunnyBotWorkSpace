@@ -21,7 +21,7 @@ public class Bling
     
     public Bling()
     {
-    	chat = new I2C(I2C.Port.kOnboard, 168);
+    	chat = new I2C(I2C.Port.kOnboard, 4);
         
         //DigitalModule digiMod = DigitalModule.getInstance(1);
         //chat = digiMod.getI2C(168);

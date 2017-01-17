@@ -132,14 +132,15 @@ public class Robot extends IterativeRobot {
 		// Scheduler.getInstance().run();
 	}
 
-	public void autonomousInit() {
+	public void autonomousInit()
+	{
 		autoLoop = 0;
 		angleController.setPID(SmartDashboard.getNumber("Set PAuto"), SmartDashboard.getNumber("Set IAuto"), SmartDashboard.getNumber("Set DAuto"));
 		angleController.enable();
 		
-		forward(20);
+		forward(10);
 		
-		turnRight();
+/**		turnRight();
 		
 		forward(9);
 		
@@ -163,14 +164,15 @@ public class Robot extends IterativeRobot {
 		
 		forward(20);
 		
-		stop();
+**/		stop();
 		
 		angleController.disable();
 		angleController.reset();
 	}
 	//long prevTime = System.currentTimeMillis();
 	
-	public void autonomousPeriodic() {
+	public void autonomousPeriodic() 
+	{
 		
 		int nextCount = 0;
 		int startCount = 0;
@@ -218,7 +220,10 @@ public class Robot extends IterativeRobot {
 		if (shootJoystick.getRawButton(4)){
 			flywheelLeft.set(.4);
 			flywheelRight.set(.4);
-		} else {
+		} else if(shootJoystick.getRawButton(5)&&shootJoystick.getRawButton(6)){
+			flywheelLeft.set(.5);
+			flywheelRight.set(.5);
+		} else{
 			flywheelLeft.set(.3);
 			flywheelRight.set(.3);
 		}
@@ -236,11 +241,18 @@ public class Robot extends IterativeRobot {
 		shooterRight.update(shootJoystick.getRawAxis(3) > .5);
 		motorRight.set(shooterRight.getMotorSpeed() / 2);
 		
-	    if (shooterLeft.getBling() == 1 || shooterRight.getBling() == 1) {
+	    if (shooterLeft.getBling() == 1 || shooterRight.getBling() == 1)
+	    {
 	    	bling.set(1);
-	    } else {
+	    } else if(shooterLeft.getBling() == 2 || shooterRight.getBling() == 2) 
+	    {
+	    	bling.set(2);
+	    }
+	    else 
+	    {
 	    	bling.set(0);
 	    }
+		
 		/*
 		 * if(joystick.getRawButton(2)){ flywheel.set(0.4); } else
 		 * if(joystick.getRawButton(8)){ flywheel.set(0.0); } else

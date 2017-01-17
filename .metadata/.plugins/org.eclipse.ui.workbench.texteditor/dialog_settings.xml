@@ -2,20 +2,20 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="System.out.println(" key="selection"/>
+		<item value="drive" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="drive"/>
+			<item value="bling.set"/>
 			<item value="SmartDashboard.putString(&quot;State&quot;,"/>
 			<item value="finishCount"/>
 			<item value="nextCount"/>
 			<item value="tankdrive"/>
 			<item value="myRobot.setLeftRightMotorOutputs"/>
 			<item value="pidget"/>
-			<item value="SmartDashboard"/>
-			<item value="alsoset"/>
 		</list>
 		<list key="replacehistory">
 			<item value="System.out.println("/>

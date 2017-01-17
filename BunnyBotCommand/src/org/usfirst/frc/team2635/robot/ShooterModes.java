@@ -33,7 +33,7 @@ public class ShooterModes {
 	public void setSwitch(boolean nerfS) {
 		nerfSwitch=nerfS;
 		if(nerfSwitch) {
-			System.out.println("TRUE");
+			//System.out.println("TRUE");
 		}
 	}
 	public void modeChange (boolean singleButton,boolean burstButton,boolean autoButton){
@@ -45,7 +45,7 @@ public class ShooterModes {
 		}
 		else if(autoButton && !singleButton && !burstButton) {
 			modesState = modesEnum.AUTO;
-			System.out.println("Switched mode to auto");
+			//System.out.println("Switched mode to auto");
 		}
 	}
 	
@@ -87,7 +87,7 @@ public class ShooterModes {
 			if (nerfSwitch==false&&set==true){
 				motorSpeed = 0.0;
 				singleShooterState = singleShooterEnum.RESET;
-				System.out.println("Stopped");	
+				//System.out.println("Stopped");	
 				blingScene = 0;
 		}
 			else if(nerfSwitch==true) {
@@ -137,8 +137,8 @@ public class ShooterModes {
 				if (nerfSwitch==false&&set==true){
 					motorSpeed = 0.0;
 					burstShooterState = burstShooterEnum.RESET;
-					System.out.println("Stopped");	
-					blingScene = 0;
+					//System.out.println("Stopped");	
+					blingScene = 1;
 				}
 				else if(nerfSwitch==true) {
 					set=true;
@@ -187,7 +187,7 @@ public class ShooterModes {
 				motorSpeed = 1.0;
 				set=false;
 				autoShooterState = autoShooterEnum.SHOOTING;
-				blingScene = 1;
+				blingScene = 2;
 			}
 			break;
 		case SHOOTING:
@@ -195,8 +195,8 @@ public class ShooterModes {
 			if (nerfSwitch==false&&set==true){
 				motorSpeed = 0.0;
 				autoShooterState = autoShooterEnum.RESET;
-				System.out.println("Stopped");
-				blingScene = 0;
+				//System.out.println("Stopped");
+				blingScene = 2;
 			}
 			else if(nerfSwitch==true) {
 				set=true;
