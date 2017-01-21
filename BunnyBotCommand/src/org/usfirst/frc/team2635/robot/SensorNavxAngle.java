@@ -10,6 +10,8 @@ import edu.wpi.first.wpilibj.PIDSourceType;
  * @author LakeM
  *
  */
+
+
 public class SensorNavxAngle extends BaseSensor<Double>
 {
 	AHRS navx;
